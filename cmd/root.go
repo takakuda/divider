@@ -17,8 +17,9 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/spf13/cobra"
 	"os"
+
+	"github.com/spf13/cobra"
 
 	homedir "github.com/mitchellh/go-homedir"
 	"github.com/spf13/viper"
@@ -27,18 +28,18 @@ import (
 var cfgFile string
 
 // rootCmd represents the base command when called without any subcommands
-var rootCmd = &cobra.Command{
-	Use:   "divider",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
+var rootCmd = newRootCmd()
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	//	Run: func(cmd *cobra.Command, args []string) { },
+func newRootCmd() *cobra.Command {
+	return &cobra.Command{
+		Use:   "divider",
+		Short: "This is hello command",
+		Long:  "description",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			fmt.Println("hello world!")
+			return nil
+		},
+	}
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
